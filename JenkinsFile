@@ -30,7 +30,13 @@ node {
       }
    }
    stage('Deploy') {
-       bat('curl -u jenkins:jenkins -T target/**.war "http://localhost:8080/manager/text/deploy?path=/devops&update=true"')
+       bat label: '', script: '''for /f "tokens=*" %%a in (
+         \'dir /B target\\*.war\'
+         ) do (
+         set fileName=%%a
+         )
+
+         curl -X PUT -u %tcuser%:%tcpass% -F filedata=@target\\%fileName% "http://localhost:8080/manager/text/deploy?path=/devops&update=true"'''
    }
    stage("Smoke Test"){
        bat("curl --retry-delay 10 --retry 5 http://localhost:8080/devops")

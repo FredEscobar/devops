@@ -2,7 +2,7 @@ node {
    def mvnHome
    stage('Prepare') {
       git branch: 'develop', credentialsId: '4cb57e29-d4fe-4609-a0e5-02aef775a96f', url: 'https://github.com/FredEscobar/devops.git'
-      mvnHome = tool 'maven'
+      mvnHome = tool 'Maven'
    }
    stage('Build') {
       if (isUnix()) {

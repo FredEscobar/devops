@@ -73,7 +73,7 @@ node {
    }
 
     stage("Smoke Test"){
-       sh "curl --retry-delay 10 --retry 5 http://localhost:8080/devops"
+       bat ("curl --retry-delay 10 --retry 5 http://localhost:8080/devops")
     }
 
   }
